@@ -246,7 +246,8 @@ const page = () => {
 
             </div>
 
-            <div className='w-9/12 py-10'>
+            <div className='w-9/12 py-10 rounded-2xl shadow-lg px-10 py-7'>
+              <p className='py-7 text-2xl font-bold'>Active Entities</p>
   <ChartContainer config={chartConfig} className="min-h-[150px] w-full">
     <BarChart accessibilityLayer data={chartData}>
       <CartesianGrid vertical={false} />
