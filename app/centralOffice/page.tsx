@@ -15,10 +15,10 @@ import bellicon from '../images/Group 1000002785.png'
 import rectanglehollow from '../images/Rectangle 907.png'
 import rectanglefilled from '../images/Rectangle 1393.png'
 import arrowhead from '../images/Group 21861.png'
-
-
+import { Calendar } from "@/components/ui/calendar"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
- 
+ import { useState } from 'react'
+
 import {
   ChartConfig,
   ChartContainer,
@@ -122,37 +122,42 @@ const eventApprovalData=[
 
     {
       name:"lorem ipsum",
-      datepurchased:"1-2-2024",
-      purchasedby:"xyz",
+      datepurchased:"",
+      purchasedby:"",
       
     },
     {
-        name:"lorem ipsum",
-        datepurchased:"1-2-2024",
-        purchasedby:"xyz",
+      name:"lorem ipsum",
+      datepurchased:"",
+      purchasedby:"",
         
       },
       {
         name:"lorem ipsum",
-        datepurchased:"1-2-2024",
-        purchasedby:"xyz",
+      datepurchased:"",
+      purchasedby:"",
         
       },
       {
         name:"lorem ipsum",
-        datepurchased:"1-2-2024",
-        purchasedby:"xyz",
+        datepurchased:"",
+        purchasedby:"",
         
       },
       {
         name:"lorem ipsum",
-        datepurchased:"1-2-2024",
-        purchasedby:"xyz",
+        datepurchased:"",
+        purchasedby:"",
         
       }
 ]
 
 const page = () => {
+
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  
+
+
     return (
       <div className='flex w-screen '>
         <div className='sidebar  flex flex-col gap-6 w-1/5 h-screen'>
@@ -175,7 +180,7 @@ const page = () => {
         <div className='w-full flex flex-col '>
           <div className='Navbar flex w-full h-[100px]  items-center justify-between px-3'>
             <div className='flex gap-2 px-5 py-5 h-[60px] bg-[#F9FAFB] rounded-2xl'>
-              <Image src={search} alt="search" className='w-6 h-6' />
+              <Image src={search} alt="search" className='w-[24px] h-[24px]' />
               <input placeholder='Search' className='outline-none bg-[#F9FAFB] w-[300px]' />
             </div>
   
@@ -196,8 +201,9 @@ const page = () => {
               <Image src={arrowhead} alt="profile" className='w-[16.86px] h-[16px] mt-3 hover:cursor-pointer' />
             </div>
           </div>
-  
-          <div className='w-full'>
+
+          <div className='w-full flex px-10 py-7 '>
+     <div className='w-11/12 border-r-2'>
             <div className='w-full h-auto flex gap-6 py-7 px-10'>
               {
                 EntityData.map((entity, index) => (
@@ -210,7 +216,7 @@ const page = () => {
 
             <div className='w-full flex gap-6 px-10 py-7'>
     
-            <div className='eventApproval-section shadow-md  rounded-2xl w-6/12 px-7 py-5'>
+            <div className='eventApproval-section shadow-md  rounded-2xl w-8/12 px-7 py-5'>
               <h2 className="text-2xl font-semibold mb-4">Event Approval</h2>
               <table className="w-full bg-white ">
                 <thead className="">
@@ -246,7 +252,7 @@ const page = () => {
 
             </div>
 
-            <div className='w-9/12 py-10 rounded-2xl shadow-lg px-10 py-7'>
+            <div className='w-9/12  rounded-2xl shadow-lg px-10 py-7'>
               <p className='py-7 text-2xl font-bold'>Active Entities</p>
   <ChartContainer config={chartConfig} className="min-h-[150px] w-full">
     <BarChart accessibilityLayer data={chartData}>
@@ -267,10 +273,22 @@ const page = () => {
       <Bar dataKey="Communities" fill="var(--color-Communities)" radius={4} />
     </BarChart>
   </ChartContainer>
-</div>
+         </div>
 
 
           </div>
+
+          <div className='calender_section flex justify-center '>
+          <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      className="rounded-md "
+    />
+          </div>
+          </div>
+  
+          
         </div>
       </div>
     )
