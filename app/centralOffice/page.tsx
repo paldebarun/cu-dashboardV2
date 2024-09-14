@@ -101,287 +101,360 @@ const EntityData=[
 
 ]
 
+interface ScheduleEvent {
+  start: string;
+  end: string;
+  subject: string;
+  location?: string;
+  organizer?: string;
+}
 
-// const scheduledData = {
-//   "2024-09-21": {
-//     "9:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "9:00-9:30"
-//     },
-//     "10:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "11:00-11:30"
-//     },
-//     "12:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "14:00-14:30"
-//     },
-//     "15:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "15:00-15:30"
-//     },
-//     "16:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "16:00-16:30"
-//     },
-//     "17:00": {
-//       subject: "Interview Call for Freshers",
-//       time: "17:00-17:30"
-//     }
-//   },
-//   "2024-09-22": {
-//     "9:00": {
-//       subject: "Art Exhibition Setup",
-//       time: "9:00-9:30"
-//     },
-//     "10:00": {
-//       subject: "Art Exhibition Opening",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "Guided Tour",
-//       time: "11:00-11:30"
-//     },
-//     "12:00": {
-//       subject: "Guest Speaker Session",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Artist Meet & Greet",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "Art Exhibition Main Event",
-//       time: "14:00-14:30",
-//       location: "Art Gallery",
-//       organizer: "Cultural Society"
-//     },
-//     "15:00": {
-//       subject: "Live Painting Demo",
-//       time: "15:00-15:30"
-//     },
-//     "16:00": {
-//       subject: "Closing Ceremony",
-//       time: "16:00-16:30"
-//     },
-//     "17:00": {
-//       subject: "Exhibition Wrap-Up",
-//       time: "17:00-17:30"
-//     }
-//   },
-//   "2024-09-23": {
-//     "9:00": {
-//       subject: "AI Workshop Setup",
-//       time: "9:00-9:30"
-//     },
-//     "10:00": {
-//       subject: "Introduction to AI",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "AI Workshop Session 1",
-//       time: "11:00-11:30",
-//       location: "Room 204",
-//       organizer: "Tech Club"
-//     },
-//     "12:00": {
-//       subject: "AI Tools Overview",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Lunch Break",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "AI Workshop Session 2",
-//       time: "14:00-14:30"
-//     },
-//     "15:00": {
-//       subject: "Hands-on AI Project",
-//       time: "15:00-15:30"
-//     },
-//     "16:00": {
-//       subject: "AI in Industry Discussion",
-//       time: "16:00-16:30"
-//     },
-//     "17:00": {
-//       subject: "Workshop Closing Remarks",
-//       time: "17:00-17:30"
-//     }
-//   },
-//   "2024-09-24": {
-//     "9:00": {
-//       subject: "Music Fest Setup",
-//       time: "9:00-9:30"
-//     },
-//     "10:00": {
-//       subject: "Sound Check",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "Band Rehearsal",
-//       time: "11:00-11:30"
-//     },
-//     "12:00": {
-//       subject: "Stage Setup",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Lunch Break",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "Guest Artist Performance",
-//       time: "14:00-14:30"
-//     },
-//     "15:00": {
-//       subject: "Main Music Fest",
-//       time: "15:00-15:30",
-//       location: "Auditorium",
-//       organizer: "Music Society"
-//     },
-//     "16:00": {
-//       subject: "Band Performance",
-//       time: "16:00-16:30"
-//     },
-//     "17:00": {
-//       subject: "Closing Act",
-//       time: "17:00-17:30"
-//     }
-//   },
-//   "2024-09-25": {
-//     "9:00": {
-//       subject: "Hackathon Kickoff",
-//       time: "9:00-9:30",
-//       location: "Lab 101",
-//       organizer: "Coding Club"
-//     },
-//     "10:00": {
-//       subject: "Team Formation",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "Problem Statement Release",
-//       time: "11:00-11:30"
-//     },
-//     "12:00": {
-//       subject: "Coding Begins",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Lunch Break",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "Coding Continues",
-//       time: "14:00-14:30"
-//     },
-//     "15:00": {
-//       subject: "Progress Check",
-//       time: "15:00-15:30"
-//     },
-//     "16:00": {
-//       subject: "Mentorship Session",
-//       time: "16:00-16:30"
-//     },
-//     "17:00": {
-//       subject: "Day 1 Wrap-Up",
-//       time: "17:00-17:30"
-//     }
-//   },
-//   "2024-09-26": {
-//     "9:00": {
-//       subject: "Drama Rehearsal Setup",
-//       time: "9:00-9:30"
-//     },
-//     "10:00": {
-//       subject: "Scene 1 Rehearsal",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "Scene 2 Rehearsal",
-//       time: "11:00-11:30"
-//     },
-//     "12:00": {
-//       subject: "Scene 3 Rehearsal",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Lunch Break",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "Scene 4 Rehearsal",
-//       time: "14:00-14:30"
-//     },
-//     "15:00": {
-//       subject: "Scene 5 Rehearsal",
-//       time: "15:00-15:30"
-//     },
-//     "16:00": {
-//       subject: "Full Dress Rehearsal",
-//       time: "16:00-16:30",
-//       location: "Main Stage",
-//       organizer: "Drama Club"
-//     },
-//     "17:00": {
-//       subject: "Rehearsal Wrap-Up",
-//       time: "17:00-17:30"
-//     }
-//   },
-//   "2024-09-27": {
-//     "9:00": {
-//       subject: "Networking Event Setup",
-//       time: "9:00-9:30"
-//     },
-//     "10:00": {
-//       subject: "Keynote Speech",
-//       time: "10:00-10:30"
-//     },
-//     "11:00": {
-//       subject: "Panel Discussion",
-//       time: "11:00-11:30"
-//     },
-//     "12:00": {
-//       subject: "Networking Session 1",
-//       time: "12:00-12:30"
-//     },
-//     "13:00": {
-//       subject: "Lunch Break",
-//       time: "13:00-13:30"
-//     },
-//     "14:00": {
-//       subject: "Networking Session 2",
-//       time: "14:00-14:30"
-//     },
-//     "15:00": {
-//       subject: "Main Networking Event",
-//       time: "15:00-15:30",
-//       location: "Conference Room",
-//       organizer: "Professional Society"
-//     },
-//     "16:00": {
-//       subject: "Industry Expert Meetup",
-//       time: "16:00-16:30"
-//     },
-//     "17:00": {
-//       subject: "Event Wrap-Up",
-//       time: "17:00-17:30"
-//     }
-//   }
-// };
+
+const scheduledData: { [key: string]: ScheduleEvent[]} = {
+  "2024-09-21": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "Interview Call for Freshers"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Interview Call for Freshers"
+    }
+  ],
+  "2024-09-22": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "Art Exhibition Setup"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Art Exhibition Opening"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "Guided Tour"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "Guest Speaker Session"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Artist Meet & Greet"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "Art Exhibition Main Event",
+      "location": "Art Gallery",
+      "organizer": "Cultural Society"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Live Painting Demo"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "Closing Ceremony"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Exhibition Wrap-Up"
+    }
+  ],
+  "2024-09-23": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "AI Workshop Setup"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Introduction to AI"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "AI Workshop Session 1",
+      "location": "Room 204",
+      "organizer": "Tech Club"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "AI Tools Overview"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Lunch Break"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "AI Workshop Session 2"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Hands-on AI Project"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "AI in Industry Discussion"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Workshop Closing Remarks"
+    }
+  ],
+  "2024-09-24": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "Music Fest Setup"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Sound Check"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "Band Rehearsal"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "Stage Setup"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Lunch Break"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "Guest Artist Performance"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Main Music Fest",
+      "location": "Auditorium",
+      "organizer": "Music Society"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "Band Performance"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Closing Act"
+    }
+  ],
+  "2024-09-25": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "Hackathon Kickoff",
+      "location": "Lab 101",
+      "organizer": "Coding Club"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Team Formation"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "Problem Statement Release"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "Coding Begins"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Lunch Break"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "Coding Continues"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Progress Check"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "Mentorship Session"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Day 1 Wrap-Up"
+    }
+  ],
+  "2024-09-26": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "Drama Rehearsal Setup"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Scene 1 Rehearsal"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "Scene 2 Rehearsal"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "Scene 3 Rehearsal"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Lunch Break"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "Scene 4 Rehearsal"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Scene 5 Rehearsal"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "Full Dress Rehearsal",
+      "location": "Main Stage",
+      "organizer": "Drama Club"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Rehearsal Wrap-Up"
+    }
+  ],
+  "2024-09-27": [
+    {
+      "start": "9:00",
+      "end": "9:30",
+      "subject": "Networking Event Setup"
+    },
+    {
+      "start": "10:00",
+      "end": "10:30",
+      "subject": "Keynote Speech"
+    },
+    {
+      "start": "11:00",
+      "end": "11:30",
+      "subject": "Panel Discussion"
+    },
+    {
+      "start": "12:00",
+      "end": "12:30",
+      "subject": "Networking Session 1"
+    },
+    {
+      "start": "13:00",
+      "end": "13:30",
+      "subject": "Lunch Break"
+    },
+    {
+      "start": "14:00",
+      "end": "14:30",
+      "subject": "Networking Session 2"
+    },
+    {
+      "start": "15:00",
+      "end": "15:30",
+      "subject": "Main Networking Event",
+      "location": "Conference Room",
+      "organizer": "Professional Society"
+    },
+    {
+      "start": "16:00",
+      "end": "16:30",
+      "subject": "Industry Expert Meetup"
+    },
+    {
+      "start": "17:00",
+      "end": "17:30",
+      "subject": "Event Wrap-Up"
+    }
+  ]
+};
+
+
 
 
 
@@ -437,16 +510,29 @@ const eventApprovalData=[
 
 
 
-const page = () => {
+const Page = () => {
 
   const [date, setDate] = useState<Date | undefined>(new Date());
-  
-  useEffect(()=>{
-    const fun=()=>{
-      console.log("this is date",date);
+  const [schedule, setSchedule] = useState<ScheduleEvent[]>([]);
+
+  useEffect(() => {
+    if (date) {
+      const formattedDate = date.toISOString().split('T')[0];
+      console.log(formattedDate);
+
+      // Check if the date exists in the scheduledData
+      const data = scheduledData[formattedDate] || [];
+
+      // If data is empty, use today's date as fallback
+      const finalData = data.length ? data : scheduledData[new Date().toISOString().split('T')[0]] || [];
+
+      setSchedule(finalData);
+    } else {
+      // If date is not provided, use today's date
+      const today = new Date().toISOString().split('T')[0];
+      setSchedule(scheduledData[today] || []);
     }
-    fun();
-  },[date]);
+  }, [date]);
 
 
     return (
@@ -577,9 +663,27 @@ const page = () => {
       className="rounded-md "
     />
 
-<div className='shcedile-section mt-6 '>
-          
+<div className='schedule-section w-full mt-6 flex flex-col justify-start gap-6 px-2'>
+  {schedule.length > 0 ? (
+    schedule.map((data, index) => (
+      <div key={index} className='flex gap-2 border-b-2 py-3'>
+        <p className='text-slate-500 text-wrap'>
+          {data.start}
+        </p>
+
+        <div className='bg-[#C3DBFF] w-9/12 p-3 space-y-4 rounded-2xl'>
+          <p className='text-sm'>{data.subject}</p>
+          <p className='text-sm text-slate-500'>{data.start} - {data.end}</p>
         </div>
+      </div>
+    ))
+  ) : (
+    <div className='w-full flex justify-center'>
+       <p className="text-slate-500 py-3 ">No schedule available </p>
+    </div>
+   
+  )}
+</div>
           
           </div>
           </div>
@@ -590,5 +694,5 @@ const page = () => {
     )
   }
   
-  export default page
+  export default Page
   
