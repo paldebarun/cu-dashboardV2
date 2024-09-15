@@ -18,6 +18,7 @@ import arrowhead from '../images/Group 21861.png'
 import { Calendar } from "@/components/ui/calendar"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
  import { useState,useEffect } from 'react'
+ import plus from '../images/Group 1000002786.png'
 
 import {
   ChartConfig,
@@ -520,15 +521,15 @@ const Page = () => {
       const formattedDate = date.toISOString().split('T')[0];
       console.log(formattedDate);
 
-      // Check if the date exists in the scheduledData
+
       const data = scheduledData[formattedDate] || [];
 
-      // If data is empty, use today's date as fallback
+ 
       const finalData = data.length ? data : scheduledData[new Date().toISOString().split('T')[0]] || [];
 
       setSchedule(finalData);
     } else {
-      // If date is not provided, use today's date
+      
       const today = new Date().toISOString().split('T')[0];
       setSchedule(scheduledData[today] || []);
     }
@@ -598,21 +599,21 @@ const Page = () => {
               <table className="w-full bg-white ">
                 <thead className="">
                   <tr>
-                    <th className="py-3 font-thin text-slate-600 px-6 text-left">Name</th>
-                    <th className="py-3 font-thin text-slate-600 px-6 text-left">Date Purchased</th>
-                    <th className="py-3 font-thin text-slate-600 px-6 text-left">Purchased By</th>
-                    <th className="py-3 font-thin text-slate-600 px-6 text-left"></th> 
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Name</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Date Purchased</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Purchased By</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left"></th> 
                   </tr>
                 </thead>
                 <tbody>
                   {
                     eventApprovalData.map((event, index) => (
                       <tr key={index} className="border-b px-2">
-                        <td className="py-3 px-6 font-light">{event.name}</td>
-                        <td className="py-3 px-6 font-light">{event.datepurchased}</td>
-                        <td className="py-3 px-6 font-light">{event.purchasedby}</td>
+                        <td className="py-3 text-sm px-6 font-light">{event.name}</td>
+                        <td className="py-3 text-sm px-6 font-light">{event.datepurchased}</td>
+                        <td className="py-3 text-sm px-6 font-light">{event.purchasedby}</td>
                         <td className="py-3 px-6 ">
-                          <button className="bg-[#F0F9FF]  text-[#89868D] px-4 py-2 rounded-xl  border boorder-[#0095FF]">
+                          <button className="bg-[#F0F9FF]  text-[#89868D] text-sm px-3 py-2 rounded-xl  border boorder-[#0095FF]">
                            View
                           </button>
                         </td>
@@ -655,13 +656,21 @@ const Page = () => {
 
           </div>
 
-          <div className='calender_section flex flex-col justify-start items-center '>
+          <div className='calender_section flex flex-col justify-start items-center px-3 bg-slate-100 rounded-lg'>
           <Calendar
       mode="single"
       selected={date}
       onSelect={setDate}
       className="rounded-md "
     />
+<div className='w-full py-3 rounded-lg bg-white '>
+    <div className=' w-full flex justify-between px-3'>
+    <p>{date?.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</p>
+      <div className='bg-[#0095FF] w-[35px] h-[36px] rounded-lg flex items-center justify-center hover:cursor-pointer'>
+        <Image src={plus} alt="add-schedule"/>
+      </div>
+
+    </div>
 
 <div className='schedule-section w-full mt-6 flex flex-col justify-start gap-6 px-2'>
   {schedule.length > 0 ? (
@@ -684,7 +693,8 @@ const Page = () => {
    
   )}
 </div>
-          
+
+        </div>  
           </div>
           </div>
   
