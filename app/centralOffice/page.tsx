@@ -83,26 +83,38 @@ const sidebarData=[
     
 ]
 
-const EntityData=[
-    {   text:"Entity",
-        width:178,
-        height:181
-    },
-    {   text:"Entity",
-        width:178,
-        height:181
-    },
-    {   text:"Entity",
-        width:178,
-        height:181
-    },
-    {   
-        text:"Entity",
-        width:178,
-        height:181
-    },
+const EntityData = [
+  {
+    title: "Total Student Bodies",
+    value: "568",
+    data: [
+      { label: "Dept. Societies", value: "50" },
+      { label: "Prof. Societies", value: "68" },
+      { label: "Clubs", value: "352" },
+      { label: "Communities", value: "98" }
+    ]
+  },
+  {
+    title: "Total Events",
+    value: "176",
+    data: [
+      { label: "Flagship Events", value: "08" },
+      { label: "Monthly Events", value: "78" },
+      { label: "Weekly Events", value: "90" }
+    ]
+  },
 
-]
+  {
+    title: "Pending Finance Approvals",
+    value: "20",
+    data: [
+      { label: "Flagship Events", value: "05" },
+      { label: "Monthly Events", value: "06" },
+      { label: "Weekly Events", value: "09" }
+    ]
+  }
+];
+
 
 interface ScheduleEvent {
   start: string;
@@ -493,32 +505,32 @@ const eventApprovalData=[
 
     {
       name:"lorem ipsum",
-      datepurchased:"",
-      purchasedby:"",
+      datepurchased:"21.8.2024",
+      purchasedby:"Ms. Ankita",
       
     },
     {
       name:"lorem ipsum",
-      datepurchased:"",
-      purchasedby:"",
+      datepurchased:"21.8.24",
+      purchasedby:"Mr. SRK",
         
       },
       {
         name:"lorem ipsum",
-      datepurchased:"",
-      purchasedby:"",
+      datepurchased:"21.8.24",
+      purchasedby:"Ms. Amya",
         
       },
       {
         name:"lorem ipsum",
-        datepurchased:"",
-        purchasedby:"",
+        datepurchased:"21.8.24",
+        purchasedby:"Mr. Toshit",
         
       },
       {
         name:"lorem ipsum",
-        datepurchased:"",
-        purchasedby:"",
+        datepurchased:"21.8.24",
+        purchasedby:"Ms. Ankita",
         
       }
 ]
@@ -597,15 +609,30 @@ const Page = () => {
 
           <div className='w-full flex px-10 py-7 '>
      <div className='w-11/12 border-r-2'>
-            <div className='w-full h-auto flex gap-6 py-7 px-10'>
-              {
-                EntityData.map((entity, index) => (
-                  <div key={index} className="w-[150px] h-[150px] rounded-2xl shadow-lg flex items-center justify-center">
-                    <p>{entity.text}</p>
-                  </div>
-                ))
-              }
+            <div className="w-full h-auto flex gap-6 py-7 px-10">
+  {
+    EntityData.map((entity, index) => (
+      <div key={index} className="w-[220px] h-auto p-4 rounded-2xl shadow-lg border border-blue-300">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="icon bg-blue-500 text-white p-2 rounded-full"></span>
+          <p className="font-semibold">{entity.title}</p>
+        </div>
+        
+        <p className="text-2xl font-bold text-blue-500 mb-2">{entity.value}</p>
+        
+        <div className="text-sm text-gray-600 space-y-1">
+          {entity.data.map((item, i) => (
+            <div key={i} className="flex justify-between">
+              <span>{item.label}</span>
+              <span className="text-blue-500">{item.value}</span>
             </div>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
 
             <div className='w-full flex gap-6 px-10 py-7'>
     
@@ -615,8 +642,8 @@ const Page = () => {
                 <thead className="">
                   <tr>
                     <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Name</th>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Date Purchased</th>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Purchased By</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Date Punched</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Punched By</th>
                     <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left"></th> 
                   </tr>
                 </thead>
@@ -639,9 +666,65 @@ const Page = () => {
               </table>
             </div>
 
-            <div className='w-3/12 shadow-lg rounded-2xl'>
-              <p className='text-white'>xyz</p>
-            </div>
+            <div className="w-5/12 shadow-lg rounded-2xl flex flex-col space-y-8 p-4">
+  <div className="bg-blue-100 p-4 rounded-lg shadow-sm ">
+    <p className="text-lg font-semibold mb-2">Urgent Tasks</p>
+    <div className="space-y-2">
+      <div className="flex items-center space-x-2">
+        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
+        <div>
+          <p>Finance Approval</p>
+          <p className="text-sm text-gray-500">TechFest</p>
+        </div>
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
+        <div>
+          <p>Finance Approval</p>
+          <p className="text-sm text-gray-500">TechFest</p>
+        </div>
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
+        <div>
+          <p>Finance Approval</p>
+          <p className="text-sm text-gray-500">TechFest</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="bg-white p-4 rounded-lg shadow-sm">
+    <p className="text-lg font-semibold mb-2">Quick Tasks</p>
+    <div className="space-y-2">
+      <div className="flex items-center space-x-2">
+        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
+        <div>
+          <p>Event Approval</p>
+          <p className="text-sm text-gray-500">15 Notifications</p>
+        </div>
+        
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
+        <div>
+          <p>Entity Approval</p>
+          <p className="text-sm text-gray-500">15 Notifications</p>
+        </div>
+        
+      </div>
+      <div className="flex items-center space-x-2">
+        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
+        <div>
+          <p>Finance Approval</p>
+          <p className="text-sm text-gray-500">15 Notifications</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
 
             </div>
 
