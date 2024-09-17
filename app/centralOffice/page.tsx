@@ -17,6 +17,8 @@ import rectanglefilled from '../images/Rectangle 1393.png'
 import arrowhead from '../images/Group 21861.png'
 import { Calendar } from "@/components/ui/calendar"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import { LineChart, Line, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
  import { useState,useEffect } from 'react'
  import plus from '../images/Group 1000002786.png'
 
@@ -110,7 +112,20 @@ interface ScheduleEvent {
   organizer?: string;
 }
 
-
+const numberOfEvents = [
+  { month: 'Jan', flagship: 2, monthly: 4, weekly: 8 },
+  { month: 'Feb', flagship: 1, monthly: 3, weekly: 10 },
+  { month: 'Mar', flagship: 3, monthly: 5, weekly: 12 },
+  { month: 'Apr', flagship: 2, monthly: 4, weekly: 9 },
+  { month: 'May', flagship: 4, monthly: 6, weekly: 15 },
+  { month: 'Jun', flagship: 3, monthly: 5, weekly: 11 },
+  { month: 'Jul', flagship: 2, monthly: 4, weekly: 13 },
+  { month: 'Aug', flagship: 5, monthly: 7, weekly: 16 },
+  { month: 'Sep', flagship: 4, monthly: 6, weekly: 14 },
+  { month: 'Oct', flagship: 3, monthly: 5, weekly: 12 },
+  { month: 'Nov', flagship: 2, monthly: 4, weekly: 10 },
+  { month: 'Dec', flagship: 6, monthly: 8, weekly: 18 },
+];
 const scheduledData: { [key: string]: ScheduleEvent[]} = {
   "2024-09-21": [
     {
@@ -563,7 +578,7 @@ const Page = () => {
             </div>
   
             <div className='flex gap-3'>
-              <div className='w-[63.22px] h-[60px] relative'>
+              <div className='w-[43.22px] h-[40px] relative'>
                 <Image src={rectanglehollow} alt="belliconbg" className='w-full h-full' />
                 <Image src={bellicon} alt="bellicon" className='absolute w-6/12 h-6/12 top-1/4 left-1/4' />
               </div>
@@ -652,9 +667,33 @@ const Page = () => {
     </BarChart>
   </ChartContainer>
          </div>
+         <div className="w-full h-[400px] mt-8">
+      <h2 className="text-2xl font-bold mb-4">Event Frequency</h2>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart
+          data={numberOfEvents}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="flagship" stroke="#FFD700" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="monthly" stroke="#FF0000" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="weekly" stroke="#0000FF" activeDot={{ r: 8 }} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
 
 
           </div>
+          
 
           <div className='calender_section flex flex-col justify-start items-center px-3 bg-slate-100 rounded-lg'>
           <Calendar
