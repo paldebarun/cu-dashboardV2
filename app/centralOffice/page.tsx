@@ -582,7 +582,7 @@ const Page = () => {
           </div>
         </div>
   
-        <div className='w-full flex flex-col '>
+        <div className='w-full flex flex-col py-20'>
           <div className='Navbar flex w-full h-[100px]  items-center justify-between px-3'>
             <div className='flex gap-2 px-5 py-5 h-[60px] bg-[#F9FAFB] rounded-2xl'>
               <Image src={search} alt="search" className='w-[24px] h-[24px]' />
@@ -750,7 +750,7 @@ const Page = () => {
     </BarChart>
   </ChartContainer>
          </div>
-         <div className="w-full h-[400px] mt-8">
+         <div className="w-full h-[400px] mt-10  p-4">
       <h2 className="text-2xl font-bold mb-4">Event Frequency</h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
