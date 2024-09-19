@@ -1,6 +1,5 @@
 "use client"
 
-
 import React from 'react'
 import home from '../images/Home.png'
 import ManageEntities from '../images/Chart.png'
@@ -18,10 +17,8 @@ import arrowhead from '../images/Group 21861.png'
 import { Calendar } from "@/components/ui/calendar"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import { LineChart, Line, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
- import { useState,useEffect } from 'react'
- import plus from '../images/Group 1000002786.png'
-
+import { useState,useEffect } from 'react'
+import plus from '../images/Group 1000002786.png'
 import {
   ChartConfig,
   ChartContainer,
@@ -30,6 +27,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+
+
+
 
 const chartConfig = {
   Dept_Societies: {
