@@ -9,8 +9,7 @@ type EntityBannerProps = {
 
 
 const EntityBanner = ({ text, description, leftcolor, rightcolor }: EntityBannerProps) => {
-  console.log("this is leftColor: ", leftcolor);
-  console.log("this is rightColor: ", rightcolor);
+ 
 
   return (
     <div className='p-4 shadow-lg w-10/12 mx-auto rounded-2xl border'>
