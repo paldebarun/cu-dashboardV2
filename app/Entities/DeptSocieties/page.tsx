@@ -119,7 +119,7 @@ const Page = () => {
   return (
     <div className='w-9/12 flex py-10'>
         <div className='w-5/12'>
-        <EntityBanner text="club" description="Discover a world of opportunities to explore your passions and make a lasting impact on campus." leftcolor='#EE8585' rightcolor='#7A180B' />
+        <EntityBanner text="Departmental Societies" description="Discover a world of opportunities to explore your passions and make a lasting impact on campus." leftcolor='#F9D356' rightcolor='#8F7715' />
        
 
         </div>

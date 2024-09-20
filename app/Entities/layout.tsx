@@ -56,7 +56,7 @@ export default function EntityLayout({
             </button>
            </div>
         </div>
-        <div className='flex '>
+        <div className='flex w-full'>
         <div className='sidebar h-screen w-2/12 py-20 bg-[#F0F1F6]'>
          {
             sidebarData.map((ele,index)=>(
