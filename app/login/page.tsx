@@ -18,7 +18,7 @@ const page = () => {
 
         </div>
 
-        <div className='flex flex-wrap gap-8 justify-center '>
+        <div className='flex flex-wrap gap-8 overflow-hidden justify-center '>
             <div className=' w-[20rem] h-[27rem] text-white flex text-center flex-col gap-4 items-center  box-border py-7 rounded-3xl ' >
                 <div className='w-full space-y-3 border rounded-3xl py-10 px-2 flex flex-col items-center'>
                 <Image src={adminlogo} alt="adminlogin" />
