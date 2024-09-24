@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// import image from './app/images/loginpagebackground.png'
 module.exports = {
     darkMode: ["class"],
     content: [
@@ -11,6 +12,10 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		backgroundImages:{
+        
+			bgimage:"url('./app/images/loginpagebackground.png')"
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

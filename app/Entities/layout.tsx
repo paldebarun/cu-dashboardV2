@@ -8,6 +8,7 @@ import sidebarSearch from '../images/search.png'
 import depsocicon from '../images/event_available.png'
 import profsocicon from '../images/reviews.png'
 import commicon from '../images/live_help.png'
+import Link from 'next/link'
 
 const sidebarData=[
     {
@@ -51,9 +52,7 @@ export default function EntityLayout({
 
            <div className='flex items-center gap-4'>
             <Image src={home} alt="home" className='w-8 h-7 hover:cursor-pointer' />
-            <button className='bg-white px-7 py-2 rounded-full  border-2 border-slate-400'>
-                login
-            </button>
+            <Link href="/login" className='bg-white px-7 py-2 rounded-full  border-2 border-slate-400'> login</Link>
            </div>
         </div>
         <div className='flex w-full'>
