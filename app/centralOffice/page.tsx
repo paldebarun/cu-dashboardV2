@@ -28,7 +28,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-import Link from 'next/link'
+
 
 
 const chartConfig = {
