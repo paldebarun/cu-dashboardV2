@@ -1,18 +1,19 @@
 "use client";
 import { useEffect, useState } from 'react';
-import Navbar from '../../../components/navbar';
+
+
 
 const Page = ({params}:{params:{entityName:string}}) => {
   const [entityName, setEntityName] = useState(params.entityName);
 
   useEffect(() => {
-    // Decode the entityName on the client side
+  
     setEntityName(decodeURIComponent(params.entityName));
   }, [params.entityName]);
 
   return (
     <>
-      <Navbar />
+  
       <div className="flex justify-center items-center min-h-screen">
         <div style={{ backgroundColor: '#e3edff' }} className="p-10 rounded-lg shadow-lg w-full max-w-2xl">
           <div className="bg-white p-8 rounded-lg shadow-md"> 

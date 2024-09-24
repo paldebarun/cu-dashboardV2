@@ -1,9 +1,14 @@
-// components/Navbar.js
+
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Navbar = () => {
+export default function MemberShipLayout({
+    children,
+  }: {
+    children: React.ReactNode
+  }){
   return (
+    <div>
     <nav style={{ backgroundColor: '#b0acac' }}>
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
@@ -23,7 +28,7 @@ const Navbar = () => {
             <Link href="/activities">
               <p className="text-white hover:text-white px-3 py-2 text-sm font-medium">Activities</p>
             </Link>
-            <Link href="/entities">
+            <Link href="/Entities">
               <p className="text-white hover:text-white px-3 py-2 text-sm font-medium">Entities</p>
             </Link>
             <Link href="/login">
@@ -38,8 +43,11 @@ const Navbar = () => {
       <div className="md:hidden">
         {/* Add mobile menu toggle here if needed */}
       </div>
+
     </nav>
+  {children}
+    </div>
   );
 };
 
-export default Navbar;
+

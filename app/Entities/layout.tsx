@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image'
 import Culogo from '../images/cu-logo 1.png'
 import Culogo2 from '../images/Component 168.png'
@@ -13,19 +15,23 @@ import Link from 'next/link'
 const sidebarData=[
     {
        icon:sidebarSearch,
-       text:"Clubs"
+       text:"Clubs",
+       link:"/Entities/Club"
     },
     {
       icon:depsocicon,
-      text:"Dept.Soc."
+      text:"Dept.Soc.",
+       link:"/Entities/DeptSocieties"
     },
     {
         icon:profsocicon,
-        text:"Prof.Soc."
+        text:"Prof.Soc.",
+        link:"/Entities/ProfSocieties"
     },
     {
      icon:commicon,
-     text:"Communities"
+     text:"Communities",
+     link:"/Entities/Communities"
     }
 
 ]
@@ -51,7 +57,10 @@ export default function EntityLayout({
            
 
            <div className='flex items-center gap-4'>
+            <Link href="/">
             <Image src={home} alt="home" className='w-8 h-7 hover:cursor-pointer' />
+            </Link>
+            
             <Link href="/login" className='bg-white px-7 py-2 rounded-full  border-2 border-slate-400'> login</Link>
            </div>
         </div>
@@ -59,10 +68,10 @@ export default function EntityLayout({
         <div className='sidebar h-screen w-2/12 py-20 bg-[#F0F1F6]'>
          {
             sidebarData.map((ele,index)=>(
-                <div key={index} className='flex  gap-3 border-b-2 items-center px-7 py-7 group hover:bg-gradient-to-r from-[#6FA8E7] to-[#194D95] hover:cursor-pointer'>
+                <Link href={ele.link} key={index} className='flex  gap-3 border-b-2 items-center px-7 py-7 group hover:bg-gradient-to-r from-[#6FA8E7] to-[#194D95] hover:cursor-pointer'>
                     <Image src={ele.icon} alt={ele.text} className='group-hover:invert'/>
                     <p className='group-hover:text-white text-lg'>{ele.text}</p>
-                    </div>
+                    </Link>
             ))
          }
         </div>

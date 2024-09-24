@@ -1,7 +1,9 @@
+
+
 import React from 'react'
 import EntityBanner from '../EntityBanner'
 import EntityDisplay from '../EntityDisplay'
-import Link from 'next/link';
+
 
 const data=[
     {
