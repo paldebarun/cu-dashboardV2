@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import search from '../images/search.png'
 import Image from 'next/image'
 import arrowdown from '../images/keyboard_arrow_down.png'
+import Link from 'next/link';
 
 import {
   DropdownMenu,
@@ -147,7 +148,7 @@ const EntityDisplay = ({ data }: EntityDisplayProps) => {
                         <tbody>
                             {filteredData.map((item, index) => (
                                 <tr key={index} className={`border-b border-black ${index === data.length - 1 ? 'rounded-b-2xl' : ''}`}>
-                                    <td className="py-2 px-4 font-bold">{item.Name}</td>
+                                   <Link href={`../${item.Name}/membershipForm`}> <td className="py-2 px-4 font-bold">{item.Name}</td></Link>
                                     <td className="py-2 px-4 font-normal text-sm">{item.Department}</td>
                                     <td className="py-2 px-4 font-normal text-sm">{item.Institute}</td>
                                     <td className="py-2 px-4 font-normal text-sm">{item.Cluster}</td>
