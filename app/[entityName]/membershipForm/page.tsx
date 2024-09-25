@@ -15,7 +15,7 @@ const Page = ({params}:{params:{entityName:string}}) => {
   return (
     <>
   
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center py-16">
         <div style={{ backgroundColor: '#e3edff' }} className="p-10 rounded-lg shadow-lg w-full max-w-2xl">
           <div className="bg-white p-8 rounded-lg shadow-md"> 
             <h2 className="text-center text-xl font-bold mb-4">Membership Form</h2>
