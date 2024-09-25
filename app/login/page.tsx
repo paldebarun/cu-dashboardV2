@@ -11,10 +11,10 @@ import Link from 'next/link'
 
 const page = () => {
   return (
-    <div className='loginpage bg-slate-300  h-auto flex flex-col items-center gap-10 py-20 '>
+    <div className='loginpage bg-slate-300  min-h-screen flex flex-col items-center gap-10 py-20 '>
         <div className='flex gap-10 w-full justify-center items-center'>
             <Image alt="logo1" className='w-[150px] h-[50px]' src={loginlogo1} />
-            <Image alt="logo2" className='w-[160px] h-[60px]' src={loginlogo2} />
+            <Image alt="logo2" className='w-[160px] h-[50px]' src={loginlogo2} />
 
         </div>
 
