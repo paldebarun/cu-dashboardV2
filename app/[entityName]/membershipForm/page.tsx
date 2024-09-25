@@ -6,11 +6,45 @@ import { useEffect, useState } from 'react';
 
 const Page = ({params}:{params:{entityName:string}}) => {
   const [entityName, setEntityName] = useState(params.entityName);
-
+  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
   useEffect(() => {
   
     setEntityName(decodeURIComponent(params.entityName));
   }, [params.entityName]);
+  const handleSendOtp = async () => {
+    if (!email) {
+      setMessage("Please enter your university email.");
+      return;
+    }
+    
+    setLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('http://localhost:4000/api/send-otp', {  
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage("OTP sent successfully! Check your email.");
+      } else {
+        setMessage(data.message || "Failed to send OTP.");
+      }
+    } catch (error) {
+      setMessage("An error occurred while sending OTP.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -20,7 +54,7 @@ const Page = ({params}:{params:{entityName:string}}) => {
           <div className="bg-white p-8 rounded-lg shadow-md"> 
             <h2 className="text-center text-xl font-bold mb-4">Membership Form</h2>
             <h3 className="text-center text-lg font-semibold mb-4">{entityName}</h3>
-
+            {message && <p className="text-center text-red-500">{message}</p>}
             <form>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -55,13 +89,17 @@ const Page = ({params}:{params:{entityName:string}}) => {
                   id="email"
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <button
                   type="button"
+                  onClick={handleSendOtp}
                   className="  text-white px-4 py-2 rounded-xl hover:bg-blue-700"
                   style={{ backgroundColor: "#bdd3ff" }}
-                >
-                  Send OTP
+                  disabled={loading}
+                  >
+                    {loading ? 'Sending...' : 'Send OTP'}
                 </button>
                 </div>
               </div>
@@ -75,6 +113,8 @@ const Page = ({params}:{params:{entityName:string}}) => {
                   id="otp"
                   type="text"
                   placeholder="Enter OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                 />
               </div>
               <div className="flex justify-center  mb-40">
