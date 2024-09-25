@@ -28,7 +28,7 @@ export default function MemberShipLayout({
             <Link href="/activities">
               <p className="text-white hover:text-white px-3 py-2 text-sm font-medium">Activities</p>
             </Link>
-            <Link href="/Entities">
+            <Link href="/Entities/Club">
               <p className="text-white hover:text-white px-3 py-2 text-sm font-medium">Entities</p>
             </Link>
             <Link href="/login">

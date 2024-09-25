@@ -16,7 +16,7 @@ const Page = ({params}:{params:{entityName:string}}) => {
     <>
   
       <div className="flex justify-center items-center py-16">
-        <div style={{ backgroundColor: '#e3edff' }} className="p-10 rounded-lg shadow-lg w-full max-w-2xl">
+        <div className="p-10 bg-[#e3edff] rounded-lg shadow-lg w-full max-w-2xl">
           <div className="bg-white p-8 rounded-lg shadow-md"> 
             <h2 className="text-center text-xl font-bold mb-4">Membership Form</h2>
             <h3 className="text-center text-lg font-semibold mb-4">{entityName}</h3>
