@@ -2,7 +2,7 @@
 
 export default function Home() {
   return (
-    <div className=" text-white">
+    <div className=" text-black">
       {/* <main className={styles.main}>
         <Image
           className={styles.logo}
@@ -45,7 +45,7 @@ export default function Home() {
           </a>
         </div>
       </main> */}
-      hello
+     
     </div>
   );
 }
