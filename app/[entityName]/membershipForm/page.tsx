@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from 'react';
 
 
@@ -43,23 +44,26 @@ const Page = ({params}:{params:{entityName:string}}) => {
                   placeholder="Enter your UID"
                 />
               </div>
-              <div className="mb-4 relative">
+              <div className="mb-4 ">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                   University Email
                 </label>
+
+                <div className='w-full flex border rounded-xl  justify-between'>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-28"
+                  className=" bg-transparent   w-9/12 py-2 px-3 text-gray-700   outline-none"
                   id="email"
                   type="email"
                   placeholder="Enter your email"
                 />
                 <button
                   type="button"
-                  className="absolute right-1 top-11 transform -translate-y-1/2 text-white px-4 py-2 rounded-xl hover:bg-blue-700"
+                  className="  text-white px-4 py-2 rounded-xl hover:bg-blue-700"
                   style={{ backgroundColor: "#bdd3ff" }}
                 >
                   Send OTP
                 </button>
+                </div>
               </div>
 
               <div className="mb-10">
