@@ -17,7 +17,9 @@ import arrowhead from '../images/Group 21861.png'
 import { Calendar } from "@/components/ui/calendar"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import { LineChart, Line, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useState,useEffect } from 'react'
+import { useState,useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 import plus from '../images/Group 1000002786.png'
 import {
   ChartConfig,
@@ -83,37 +85,7 @@ const sidebarData=[
     
 ]
 
-const EntityData = [
-  {
-    title: "Total Student Bodies",
-    value: "568",
-    data: [
-      { label: "Dept. Societies", value: "50" },
-      { label: "Prof. Societies", value: "68" },
-      { label: "Clubs", value: "352" },
-      { label: "Communities", value: "98" }
-    ]
-  },
-  {
-    title: "Total Events",
-    value: "176",
-    data: [
-      { label: "Flagship Events", value: "08" },
-      { label: "Monthly Events", value: "78" },
-      { label: "Weekly Events", value: "90" }
-    ]
-  },
 
-  {
-    title: "Pending Finance Approvals",
-    value: "20",
-    data: [
-      { label: "Flagship Events", value: "05" },
-      { label: "Monthly Events", value: "06" },
-      { label: "Weekly Events", value: "09" }
-    ]
-  }
-];
 
 
 interface ScheduleEvent {
@@ -543,36 +515,91 @@ const Page = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [schedule, setSchedule] = useState<ScheduleEvent[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [counts, setCounts] = useState(null); 
+  const [error, setError] = useState(''); 
+  const [loading, setLoading] = useState(true); 
+  const [eventcounts,setEventcounts]= useState(null);
+  const [eventloading,setEventloading]= useState(true);
+  const router = useRouter();
 
   const handleModalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
   useEffect(() => {
-    if (date) {
-      const formattedDate = date.toISOString().split('T')[0];
-      console.log(formattedDate);
+    const fetchCounts = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/entity-counts');
+        const data = await response.json();
+  
+        if (data.success) {
+          setCounts(data.data); // Set the counts in state
+        } else {
+          setError('Failed to fetch data');
+        }
+        
+      } catch (err) {
+        console.error('Error fetching counts:', err);
+        setError('An error occurred while fetching the data.');
+      } finally {
+        setLoading(false); // Disable loading after data is fetched
+      }
+    };
 
+    fetchCounts();
+  }, []);
+  
+  useEffect(() => {
+    const fetchEventCount = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/event-counts');
+        const data = await response.json();
+  
+        if (data.success) {
+          setEventcounts(data.data); // Set the counts in state
+        } else {
+          setError('Failed to fetch data');
+        }
+        
+      } catch (err) {
+        console.error('Error fetching event counts:', err);
+        setError('An error occurred while fetching the data.');
+      } finally {
+        setLoading(false); // Disable loading after data is fetched
+      }
+    };
 
-      const data = scheduledData[formattedDate] || [];
+    fetchEventCount();
+  }, []);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+    } else {
+      // Fetch user data using token
+      fetch('http://localhost:4000/api/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setUser(data.user))
+        .catch((err) => console.error(err));
+    }
+  }, [router]);
+
 
  
-      const finalData = data.length ? data : scheduledData[new Date().toISOString().split('T')[0]] || [];
-
-      setSchedule(finalData);
-    } else {
-      
-      const today = new Date().toISOString().split('T')[0];
-      setSchedule(scheduledData[today] || []);
-    }
-  }, [date]);
-
-
+  if (!user) return <p>Loading...</p>;
+  if (!counts) return <p>Loading...</p>;
     return (
+      
       <div className='flex w-screen '>
         <div className='sidebar  flex flex-col gap-6 w-1/5 h-screen'>
           <div className='flex flex-col items-start px-10 py-4'>
             <p className='text-2xl '>Hello!</p>
-            <p className='text-3xl font-semibold'>Toshit</p>
+            <p className='text-3xl font-semibold'>{user.name}</p>
           </div>
           <div className='p-3 flex flex-col gap-5'>
             {
@@ -769,7 +796,7 @@ const Page = () => {
   
               <div className='flex items-start'></div>
               <div>
-                <p className='font-semibold'>Toshit</p>
+                <p className='font-semibold'>{user.name}</p>
                 <p className='text-slate-400'>Admin</p>
               </div>
   
@@ -779,28 +806,66 @@ const Page = () => {
 
           <div className='w-full flex px-10 py-7 '>
      <div className='w-11/12 border-r-2'>
+
             <div className="w-full h-auto flex gap-6 py-7 px-10">
-  {
-    EntityData.map((entity, index) => (
-      <div key={index} className="w-[220px] h-auto p-4 rounded-2xl shadow-lg border border-blue-300">
-        <div className="flex items-center gap-2 mb-4">
-          <span className="icon bg-blue-500 text-white p-2 rounded-full"></span>
-          <p className="font-semibold">{entity.title}</p>
-        </div>
-        
-        <p className="text-2xl font-bold text-blue-500 mb-2">{entity.value}</p>
-        
-        <div className="text-sm text-gray-600 space-y-1">
-          {entity.data.map((item, i) => (
-            <div key={i} className="flex justify-between">
-              <span>{item.label}</span>
-              <span className="text-blue-500">{item.value}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))
-  }
+            <div className="w-[220px] h-auto p-4 rounded-2xl shadow-lg border border-blue-300">
+            <div className="flex items-center gap-2 mb-4">
+  <span className="icon bg-blue-500 text-white p-2 rounded-full"></span>
+  <p className="font-semibold">Total Student Bodies</p>
+</div>
+
+<p className="text-2xl font-bold text-blue-500 mb-2">
+  {counts.clubs.count + counts.communities.count + counts.departmentalSocieties.count + counts.professionalSocieties.count}
+</p>
+
+<div className="text-sm text-gray-600 space-y-1">
+  <div className="flex justify-between">
+    <span>Club</span>
+    
+    <span className="text-blue-500">{counts.clubs.count}</span>
+  </div>
+  <div className="flex justify-between">
+    <span>Community</span>
+    <span className="text-blue-500">{counts.communities.count}</span>
+  </div>
+  <div className="flex justify-between">
+    <span>Departmental Society</span>
+    <span className="text-blue-500">{counts.departmentalSocieties.count}</span>
+  </div>
+  <div className="flex justify-between">
+    <span>Professional Society</span>
+    <span className="text-blue-500">{counts.professionalSocieties.count}</span>
+  </div>
+</div>
+</div>
+<div className="w-[220px] h-auto p-4 rounded-2xl shadow-lg border border-blue-300">
+            <div className="flex items-center gap-2 mb-4">
+  <span className="icon bg-blue-500 text-white p-2 rounded-full"></span>
+  <p className="font-semibold">Total Events</p>
+</div>
+
+<p className="text-2xl font-bold text-blue-500 mb-2">
+  {eventcounts.monthly + eventcounts.weekly + eventcounts.flagship}
+</p>
+
+<div className="text-sm text-gray-600 space-y-1">
+  <div className="flex justify-between">
+    <span>Weekly Events</span>
+    
+    <span className="text-blue-500">{eventcounts.weekly}</span>
+  </div>
+  <div className="flex justify-between">
+    <span>Monthly Events</span>
+    <span className="text-blue-500">{eventcounts.monthly}</span>
+  </div>
+  <div className="flex justify-between">
+    <span>Flagship Events</span>
+    <span className="text-blue-500">{eventcounts.flagship}</span>
+  </div>
+ 
+</div>
+</div>
+ 
 </div>
 
 
@@ -996,4 +1061,4 @@ const Page = () => {
     )
   }
   
-  export default Page
+  export default Page;
