@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link';
 
 import React from 'react'
 import home from '../images/Home.png'
@@ -521,6 +522,7 @@ const Page = () => {
   const [loading, setLoading] = useState(true); 
   const [eventcounts,setEventcounts]= useState(null);
   const [eventloading,setEventloading]= useState(true);
+  const [events,setEvents] = useState([]);
   const router = useRouter();
 
   const handleModalToggle = () => {
@@ -548,7 +550,28 @@ const Page = () => {
 
     fetchCounts();
   }, []);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/event/events');
+        const data = await response.json();
   
+        if (data.success) {
+          setEvents(data.events);
+        } else {
+          setError('Failed to fetch data');
+        }
+        
+      } catch (err) {
+        console.error('Error fetching events:', err);
+        setError('An error occurred while fetching the data.');
+      } finally {
+        setLoading(false); // Disable loading after data is fetched
+      }
+    };
+
+    fetchEvents();
+  }, []);
   useEffect(() => {
     const fetchEventCount = async () => {
       try {
@@ -556,7 +579,7 @@ const Page = () => {
         const data = await response.json();
   
         if (data.success) {
-          setEventcounts(data.data); // Set the counts in state
+          setEventcounts(data.data); 
         } else {
           setError('Failed to fetch data');
         }
@@ -878,21 +901,23 @@ const Page = () => {
                   <tr>
                     <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Name</th>
                     <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Date Punched</th>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Punched By</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Event type</th>
                     <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left"></th> 
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    eventApprovalData.map((event, index) => (
+                    events.map((event, index) => (
                       <tr key={index} className="border-b px-2">
                         <td className="py-3 text-sm px-6 font-light">{event.name}</td>
-                        <td className="py-3 text-sm px-6 font-light">{event.datepurchased}</td>
-                        <td className="py-3 text-sm px-6 font-light">{event.purchasedby}</td>
+                        <td className="py-3 text-sm px-6 font-light">{event.date}</td>
+                        <td className="py-3 text-sm px-6 font-light">{event.Eventtype}</td>
                         <td className="py-3 px-6 ">
+                          <Link href="/">
                           <button className="bg-[#F0F9FF]  text-[#89868D] text-sm px-3 py-2 rounded-xl  border boorder-[#0095FF]">
                            View
                           </button>
+                          </Link>
                         </td>
                       </tr>
                     ))
