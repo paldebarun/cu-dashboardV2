@@ -1,124 +1,15 @@
 
-
+"use client"
 import React from 'react'
 import EntityBanner from '../EntityBanner'
-import EntityDisplay from '../EntityDisplay'
+import EntityDisplay from './EntityDisplay'
+import { useState,useEffect } from 'react';
 
-
-const data=[
-    {
-        Name:"Physio Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Mechatronics Engineering",
-        Institute:"University Institute of Engineering(UIE)",
-        Cluster:"Engineering & Technology"
-    },
-    {
-        Name:"Automobile Engineers Society",
-        Department:"Automobile Engineering",
-        Institute:"University Institute of Engineering(UIE)",
-        Cluster:"Engineering & Technology"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-    {
-        Name:"Mechatronics Society",
-        Department:"Physiotherapy",
-        Institute:"University Institute of Applied Health Sciences (UIAHS)",
-        Cluster:"Health & Allied Sciences"
-    },
-
-
-
-
-
-
-]
 
 
 
 const Page = () => {
+   
   return (
     <div className='w-9/12 flex py-10'>
         <div className='w-5/12'>
@@ -127,7 +18,7 @@ const Page = () => {
 
         </div>
         
-        <EntityDisplay data={data} />
+        <EntityDisplay  />
 
     </div>
   )

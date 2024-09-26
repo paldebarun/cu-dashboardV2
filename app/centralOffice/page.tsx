@@ -455,13 +455,6 @@ const scheduledData: { [key: string]: ScheduleEvent[]} = {
   ]
 };
 
-
-
-
-
-
-
-
 const chartData = [
 
   { month: "Jun", Dept_Societies: 214, Clubs: 140, Prof_Societies: 125, Communities: 82 },
@@ -471,41 +464,6 @@ const chartData = [
   { month: "Oct", Dept_Societies: 214, Clubs: 140, Prof_Societies: 125, Communities: 82 },
   { month: "Nov", Dept_Societies: 214, Clubs: 140, Prof_Societies: 125, Communities: 82 },
   { month: "Dec", Dept_Societies: 214, Clubs: 140, Prof_Societies: 125, Communities: 82 },
-]
-
-
-const eventApprovalData=[
-
-    {
-      name:"lorem ipsum",
-      datepurchased:"21.8.2024",
-      purchasedby:"Ms. Ankita",
-      
-    },
-    {
-      name:"lorem ipsum",
-      datepurchased:"21.8.24",
-      purchasedby:"Mr. SRK",
-        
-      },
-      {
-        name:"lorem ipsum",
-      datepurchased:"21.8.24",
-      purchasedby:"Ms. Amya",
-        
-      },
-      {
-        name:"lorem ipsum",
-        datepurchased:"21.8.24",
-        purchasedby:"Mr. Toshit",
-        
-      },
-      {
-        name:"lorem ipsum",
-        datepurchased:"21.8.24",
-        purchasedby:"Ms. Ankita",
-        
-      }
 ]
 
 
