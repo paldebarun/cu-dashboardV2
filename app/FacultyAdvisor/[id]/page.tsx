@@ -628,7 +628,7 @@ const signOut=()=>{
 
         const toastId = toast.loading("please wait ...");
         try {
-            const userResponse = await axios.get(`http://localhost:4000/api/centralOffice/get/${id}`);
+            const userResponse = await axios.get(`http://localhost:4000/api/facultyAdv/fetch/${id}`);
             const flagships=await axios.get('http://localhost:4000/api/event/flagship');
             const allEvents=await axios.get('http://localhost:4000/api/event/getallEvents');
             const monthlyEvents=await axios.get('http://localhost:4000/api/event/monthly');
@@ -644,7 +644,7 @@ const signOut=()=>{
            if(unApprovedEvents && unApprovedEvents.data.success){
               setEventsApproval(unApprovedEvents.data.events);
            }
-            console.log("this is response of user : ", userResponse);
+            // console.log("this is response of user : ", userResponse);
             // console.log("this is flagshipResponse : ",flagships);
             // console.log("these are all events : ",allEvents);
             // console.log("these are monthlyEvents events : ",monthlyEvents);
@@ -658,9 +658,9 @@ const signOut=()=>{
 
             if (userResponse.data.success && flagships.data.success && allEvents.data.success && monthlyEvents.data.success && weeklyEvents.data.success && clubs.data.success) {
                 if (!user) { 
-                    setUser(userResponse.data.centralOffice);
+                    setUser(userResponse.data.facultyAdvisor);
                     toast.dismiss(toastId);
-                    toast.success("welcome to Central dashboard");
+                    toast.success("welcome to Faculty dashboard");
                     EntityData[1].value=allEvents.data.events.length;
                     EntityData[1].data[0].value=flagships.data.events.length;
                     EntityData[1].data[1].value=monthlyEvents.data.events.length;
@@ -670,9 +670,6 @@ const signOut=()=>{
                     EntityData[0].data[1].value=profsocieties.data.Entity.length;
                     EntityData[0].data[2].value=clubs.data.Entity.length;
                     EntityData[0].data[3].value=communities.data.Entity.length
-
-             
-                   
                 }
 
                 else {toast.dismiss(toastId);

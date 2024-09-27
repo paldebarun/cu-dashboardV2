@@ -3,13 +3,50 @@
 import React, { useState } from 'react'
 import logo from '../../images/loginpageicon2.png'
 import Image from 'next/image'
+import axios from 'axios'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
-  const [loginData, setLoginData] = useState({ userID: '', password: '' });
+  const [loginData, setLoginData] = useState({ uid: '', password: '',role:"CentralOffice" });
+  const router = useRouter();
 
-  const submitHandler = (e: React.FormEvent) => {
+
+
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("This is login data:", loginData);
+    const toastId=toast.loading("logging in");
+
+    try{
+       
+      const loginResponse=await axios.post('http://localhost:4000/api/login/login',loginData);
+
+      console.log("this is login response : ",loginResponse);
+
+      if(loginResponse.data.success){
+        localStorage.setItem('culoginToken', "loggedin");
+      
+      toast.dismiss(toastId);
+      toast.success("logged in successfully ");
+
+      router.push(`/centralOffice/${loginResponse.data.user._id}`);
+   
+      }
+
+      else{
+      toast.dismiss(toastId);
+      toast.error("login failed ! retry ");
+      }
+
+    }
+    catch(error){
+      toast.dismiss(toastId);
+    console.log("error : ",error);
+    toast.error("login failed ! retry ");
+    }
+    
+    
+
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +68,10 @@ const Page = () => {
 
         <input
           type="text"
-          name="userID"
+          name="uid"
           placeholder='User ID'
           className='bg-transparent outline-none w-full px-3 py-4 border rounded-2xl text-white'
-          value={loginData.userID}
+          value={loginData.uid}
           onChange={handleChange}
         />
         <input

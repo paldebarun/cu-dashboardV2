@@ -8,7 +8,7 @@ import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 
 const Page = () => {
-  const [loginData, setLoginData] = useState({ uid: '', password: '' });
+  const [loginData, setLoginData] = useState({ uid: '', password: '',role:"FacultyAdv" });
   const router = useRouter();
 
 
@@ -29,7 +29,7 @@ const Page = () => {
       toast.dismiss(toastId);
       toast.success("logged in successfully ");
 
-      router.push(`/centralOffice/${loginResponse.data.user._id}`);
+      router.push(`/FacultyAdvisor/${loginResponse.data.user._id}`);
    
       }
 
