@@ -16,12 +16,15 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 
+interface body{
+    name:string
+}
 
 interface Entity {
-    Name: string;
-    Department: string;
-    Institute: string;
-    Cluster: string;
+    ProposedEntityName: String;
+    EntityDepartment: body;
+    EntityInstitute: body;
+    EntityCluster: body;
 }
 
 interface EntityDisplayProps {
@@ -29,22 +32,27 @@ interface EntityDisplayProps {
 }
 
 const departments = [
-    "Physiotherapy",
-    "Automobile Engineering",
+ 
+"DAA",
 
 ];
 
 const clusters = [
-    "Health & Allied Sciences",
-    "Engineering & Technology",
+  
+    "Technology",
 
 
 ];
 
-const EntityDisplay = ({ data }: EntityDisplayProps) => {
+const EntityDisplay = ({ data }: EntityDisplayProps ) => {
+
     const [selectedDepartments, setSelectedDepartments] = useState<string[]>([]);
     const [selectedClusters, setSelectedClusters] = useState<string[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
+   
+
+
+    console.log("this is data :",data);
    
     const handleDepartmentSelect = (department: string) => {
         setSelectedDepartments(prev => 
@@ -65,10 +73,11 @@ const EntityDisplay = ({ data }: EntityDisplayProps) => {
 
    
     const filteredData = data.filter(item =>
-        (selectedDepartments.length === 0 || selectedDepartments.includes(item.Department)) &&
-        (selectedClusters.length === 0 || selectedClusters.includes(item.Cluster)) &&
-        (item.Name.toLowerCase().includes(searchTerm.toLowerCase()))
+        (selectedDepartments.length === 0 || selectedDepartments.includes(item.EntityDepartment.name)) &&
+        (selectedClusters.length === 0 || selectedClusters.includes(item.EntityCluster.name)) &&
+        item.ProposedEntityName.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    
 
     return (
         <div className='w-11/12 shadow-xl border rounded-2xl px-2 h-[700px] bg-[#F0F1F6]'>
@@ -148,10 +157,10 @@ const EntityDisplay = ({ data }: EntityDisplayProps) => {
                         <tbody>
                             {filteredData.map((item, index) => (
                                 <tr key={index} className={`border-b border-black ${index === data.length - 1 ? 'rounded-b-2xl' : ''}`}>
-                                   <Link href={`../${item.Name}/membershipForm`}> <td className="py-2 px-4 font-bold">{item.Name}</td></Link>
-                                    <td className="py-2 px-4 font-normal text-sm">{item.Department}</td>
-                                    <td className="py-2 px-4 font-normal text-sm">{item.Institute}</td>
-                                    <td className="py-2 px-4 font-normal text-sm">{item.Cluster}</td>
+                                   <Link href={`../${item.ProposedEntityName}/membershipForm`}> <td className="py-2 px-4 font-bold">{item.ProposedEntityName}</td></Link>
+                                    <td className="py-2 px-4 font-normal text-sm">{item.EntityDepartment.name}</td>
+                                <td className="py-2 px-4 font-normal text-sm">{item.EntityInstitute.name}</td>
+                                    <td className="py-2 px-4 font-normal text-sm">{item.EntityCluster.name}</td>
                                 </tr>
                             ))}
                         </tbody>

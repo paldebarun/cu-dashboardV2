@@ -13,6 +13,8 @@ import commicon from '../images/live_help.png';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 
 const sidebarData = [
   {
@@ -42,14 +44,28 @@ export default function EntityLayout({
 }: {
   children: React.ReactNode;
 }) {
-
+  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname(); 
-
+  const [isLoggedin,setisloggedin]=useState<boolean> (false);
 
   useEffect(() => {
     setIsMounted(true); 
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('culoginToken');
+  
+    if (token=="loggedin") {
+      console.log("this is login token")
+      setisloggedin(true);
+    }
+  }, []);
+
+  const logoutHandler=()=>{
+     localStorage.removeItem('culoginToken');
+     router.push('/login');
+  }
 
   
   if (!isMounted) return null;
@@ -81,7 +97,7 @@ export default function EntityLayout({
             <Image src={home} alt="home" className='w-8 h-7 hover:cursor-pointer' />
           </Link>
 
-          <Link href="/login" className='bg-white px-7 py-2 rounded-full border-2 border-slate-400'> login</Link>
+         {isLoggedin ? <button onClick={logoutHandler} className='bg-white px-7 py-2 rounded-full border-2 border-slate-400'>logout</button> : <Link href="/login" className='bg-white px-7 py-2 rounded-full border-2 border-slate-400'>login</Link>}
         </div>
       </div>
 
