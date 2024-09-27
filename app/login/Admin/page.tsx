@@ -85,7 +85,7 @@ const Page = () => {
 
         <div
           onClick={submitHandler}
-          className='w-6/12 bg-[#D91F23] font-bold flex justify-center text-white rounded-full py-5 text-2xl'
+          className='w-6/12 bg-[#D91F23] font-bold flex justify-center text-white hover:cursor-pointer rounded-full py-5 text-2xl'
         >
           Login
         </div>
