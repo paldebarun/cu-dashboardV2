@@ -59,9 +59,9 @@ const page = () => {
             </div>
         </div>
 
-        <div className='bg-[#4587D5] text-xl text-white w-2/12 text-center rounded-3xl py-5 overflow-hidden shadow-slate-400 shadow-2xl'>
+        <Link href='/EntityForm' className='bg-[#4587D5] text-xl text-white w-2/12 text-center rounded-3xl py-5 overflow-hidden shadow-slate-400 shadow-2xl'>
         New Entity Proposal
-        </div>
+        </Link>
     </div>
   )
 }
