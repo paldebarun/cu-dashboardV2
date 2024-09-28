@@ -511,7 +511,7 @@ const Page = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/event/events');
+        const response = await fetch('http://localhost:4000/api/event/getAllEvents');
         const data = await response.json();
   
         if (data.success) {
@@ -569,8 +569,10 @@ const Page = () => {
         .catch((err) => console.error(err));
     }
   }, [router]);
-
-
+  console.log(user);
+  if(user && user.role!="Central Office"){
+    router.push('/login');
+  }
  
   if (!user) return <p>Loading...</p>;
   if (!counts) return <p>Loading...</p>;
@@ -596,7 +598,7 @@ const Page = () => {
   
         <div className='w-full flex flex-col pb-20'>
           <div className='Navbar flex w-full h-[100px]  items-center justify-between px-3'>
-            <div className='flex gap-2 px-5 py-5 h-[60px] bg-[#F9FAFB] rounded-2xl'>
+            <div className='flex gap-2 px-5 py-3 h-[60px] bg-[#F9FAFB] w-8/12 rounded-2xl'>
               <Image src={search} alt="search" className='w-[24px] h-[24px]' />
               <input placeholder='Search' className='outline-none bg-[#F9FAFB] w-[300px]' />
             </div>
@@ -778,10 +780,11 @@ const Page = () => {
               <div className='flex items-start'></div>
               <div>
                 <p className='font-semibold'>{user.name}</p>
-                <p className='text-slate-400'>Admin</p>
+                <p className='text-slate-400'>Central Office</p>
               </div>
   
               <Image src={arrowhead} alt="profile" className='w-[16.86px] h-[16px] mt-3 hover:cursor-pointer' />
+              <p>   </p>
             </div>
           </div>
 
@@ -846,46 +849,7 @@ const Page = () => {
  
 </div>
 </div>
- 
-</div>
-
-
-            <div className='w-full flex gap-6 px-10 py-7'>
-    
-            <div className='eventApproval-section shadow-md  rounded-2xl w-8/12 px-7 py-5'>
-              <h2 className="text-2xl font-semibold mb-4">Event Approval</h2>
-              <table className="w-full bg-white ">
-                <thead className="">
-                  <tr>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Name</th>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Date Punched</th>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Event type</th>
-                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left"></th> 
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    events.map((event, index) => (
-                      <tr key={index} className="border-b px-2">
-                        <td className="py-3 text-sm px-6 font-light">{event.name}</td>
-                        <td className="py-3 text-sm px-6 font-light">{event.date}</td>
-                        <td className="py-3 text-sm px-6 font-light">{event.Eventtype}</td>
-                        <td className="py-3 px-6 ">
-                          <Link href="/">
-                          <button className="bg-[#F0F9FF]  text-[#89868D] text-sm px-3 py-2 rounded-xl  border boorder-[#0095FF]">
-                           View
-                          </button>
-                          </Link>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-
-            <div className="w-5/12 shadow-lg rounded-2xl flex flex-col space-y-8 p-4">
-  <div className="bg-blue-100 p-4 rounded-lg shadow-sm ">
+<div className="bg-blue-100 p-10 rounded-lg shadow-sm ">
     <p className="text-lg font-semibold mb-2">Urgent Tasks</p>
     <div className="space-y-2">
       <div className="flex items-center space-x-2">
@@ -911,41 +875,52 @@ const Page = () => {
       </div>
     </div>
   </div>
-
-  <div className="bg-white p-4 rounded-lg shadow-sm">
-    <p className="text-lg font-semibold mb-2">Quick Tasks</p>
-    <div className="space-y-2">
-      <div className="flex items-center space-x-2">
-        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
-        <div>
-          <p>Event Approval</p>
-          <p className="text-sm text-gray-500">15 Notifications</p>
-        </div>
-        
-      </div>
-      <div className="flex items-center space-x-2">
-        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
-        <div>
-          <p>Entity Approval</p>
-          <p className="text-sm text-gray-500">15 Notifications</p>
-        </div>
-        
-      </div>
-      <div className="flex items-center space-x-2">
-        <span className="icon-class bg-blue-500 text-white p-2 rounded-full"></span>
-        <div>
-          <p>Finance Approval</p>
-          <p className="text-sm text-gray-500">15 Notifications</p>
-        </div>
-        
-      </div>
-    </div>
-  </div>
 </div>
 
 
+            <div className='w-full flex gap-6 px-10 py-7'>
+    
+            <div className='eventApproval-section shadow-md rounded-2xl w-full px-7 py-5'>
+              <h2 className="text-2xl font-semibold mb-4">Event Approval</h2>
+              <table className="w-full bg-white ">
+                <thead className="">
+                  <tr>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Name</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Date Punched</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Event type</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left">Venue</th>
+                    <th className="py-3 text-sm font-thin text-slate-600 px-6 text-left"></th> 
+                  </tr>
+                </thead>
+                <tbody>
+                {
+  events.map((event, index) => (
+    <tr key={index} className="border-b px-2">
+      <td className="py-3 text-sm px-6 font-light">{event.name}</td>
+      <td className="py-3 text-sm px-6 font-light">
+        {new Date(event.date).toLocaleDateString('en-GB')}
+      </td>
+      <td className="py-3 text-sm px-6 font-light">{event.Eventtype}</td>
+      <td className="py-3 text-sm px-6 font-light">{event.venue}</td>
+      <td className="py-3 px-6">
+        <Link href="/">
+          <button className="bg-[#F0F9FF]  text-[#89868D] text-sm px-3 py-2 rounded-xl  border border-[#0095FF]">
+            View
+          </button>
+        </Link>
+      </td>
+    </tr>
+  ))
+}
+
+                </tbody>
+              </table>
             </div>
 
+
+
+            </div>
+{/* 
             <div className='w-9/12  rounded-2xl shadow-lg px-10 py-7'>
               <p className='py-7 text-2xl font-bold'>Active Entities</p>
   <ChartContainer config={chartConfig} className="min-h-[150px] w-full">
@@ -990,20 +965,23 @@ const Page = () => {
           <Line type="monotone" dataKey="weekly" stroke="#0000FF" activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
-    </div>
 
 
-          </div>
           
 
-          <div className='calender_section flex flex-col justify-start items-center px-3 bg-slate-100 rounded-lg'>
+         
+ */}
+     </div>
+
+ 
+     <div className='calender_section flex flex-col justify-start items-center px-3 bg-slate-100 rounded-lg'>
           <Calendar
       mode="single"
       selected={date}
       onSelect={setDate}
       className="rounded-md "
     />
-<div className='w-full py-3 rounded-lg bg-white '>
+    <div className='w-full py-3 rounded-lg bg-white '>
     <div className=' w-full flex justify-between px-3'>
     <p>{date?.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</p>
       <div className='bg-[#0095FF] w-[35px] h-[36px] rounded-lg flex items-center justify-center hover:cursor-pointer'>
@@ -1011,7 +989,6 @@ const Page = () => {
       </div>
 
     </div>
-
 <div className='schedule-section w-full mt-6 flex flex-col justify-start gap-6 px-2'>
   {schedule.length > 0 ? (
     schedule.map((data, index) => (
@@ -1040,7 +1017,7 @@ const Page = () => {
   
           
         </div>
-      </div>
+        </div>
     )
   }
   
