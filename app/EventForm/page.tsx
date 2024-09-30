@@ -28,8 +28,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import uploadfile from '../images/upload_file.png'
 import rupee from '../images/₹.png'
+import { useRouter } from "next/navigation"
+import { toast } from 'react-hot-toast';
 
 const Page = () => {
+  const router = useRouter();
+  
+
+  const entity = localStorage.getItem('entity');
+  if(!entity){
+    router.push('/login');
+  }
   const [isDesktop, setIsDesktop] = useState(true);
   const [formData, setFormData] = useState({
     eventName: '',
@@ -43,7 +52,8 @@ const Page = () => {
     eventType: '',
     eventCategory: '',
     imageFile: null,
-    budget: ''
+    budget: '',
+    entity
   });
 
   useEffect(() => {
@@ -71,6 +81,7 @@ const Page = () => {
 
   const submitHandler = async () => {
     try {
+      const toastId = toast.loading("Submitting form");
       const formDataToSend = new FormData();
       for (const key in formData) {
         if (key === 'imageFile') {
@@ -91,9 +102,12 @@ const Page = () => {
 
       const result = await response.json();
       if (response.ok) {
-        alert('Event created successfully');
+        toast.dismiss(toastId);
+          toast.success("Event created successfully");
+        router.push('/StudentRepresentative');
       } else {
-        alert(result.message || 'Something went wrong');
+        toast.dismiss(toastId);
+        toast.error("Cannot create event");
       }
     } catch (error) {
       console.error('Error creating event:', error);

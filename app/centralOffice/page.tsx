@@ -898,7 +898,7 @@ const Page = () => {
     <tr key={index} className="border-b px-2">
       <td className="py-3 text-sm px-6 font-light">{event.name}</td>
       <td className="py-3 text-sm px-6 font-light">
-        {new Date(event.date).toLocaleDateString('en-GB')}
+        {new Date(event.date.startDate).toLocaleDateString('en-GB')}
       </td>
       <td className="py-3 text-sm px-6 font-light">{event.Eventtype}</td>
       <td className="py-3 text-sm px-6 font-light">{event.venue}</td>

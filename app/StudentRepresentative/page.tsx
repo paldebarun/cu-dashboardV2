@@ -738,7 +738,7 @@ const allEvents = await axios.get('http://localhost:4000/api/event/events-count-
             <Image src={rectanglefilled} alt="filledrectangle" className='w-[63.22px] h-[60px]' />
             <div>
               <p className='font-semibold'>{user.name}</p>
-              <p className='text-slate-400'>Secratory</p>
+              <p className='text-slate-400'>Secretory</p>
             </div>
             <Image src={arrowhead} alt="profile" className='w-[16.86px] h-[16px] mt-3 hover:cursor-pointer' />
             <p>     </p>
